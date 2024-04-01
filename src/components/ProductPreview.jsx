@@ -1,6 +1,8 @@
 import { Box, Paper } from "@mui/material";
+
 import Grid from "@mui/material/Unstable_Grid2";
 import { Link } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 function ProductPreview({ product }) {
   return (

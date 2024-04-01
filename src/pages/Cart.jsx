@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 function Cart() {
   const [cart, setCart] = useState(null);
