@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import { Container } from "@mui/material";
 import { useState } from "react";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
@@ -13,7 +14,7 @@ function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
 
   return (
-    <>
+    <Container>
       {/* test to let me know if i'm logged in */}
       {token && token.length > 0 ? <p>logged in</p> : <p>not logged in</p>}
 
@@ -26,7 +27,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/product/:id" element={<ProductDetails />} />
       </Routes>
-    </>
+    </Container>
   );
 }
 
