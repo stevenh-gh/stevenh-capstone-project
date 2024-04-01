@@ -1,9 +1,10 @@
 import { Box, Paper } from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { getCart, getProduct } from "../api";
+import { useEffect, useState } from "react";
+
+import Grid from "@mui/material/Unstable_Grid2";
 import Header from "../components/Header";
+import { Link } from "react-router-dom";
 
 function Cart() {
   const [cart, setCart] = useState(null);
@@ -43,12 +44,12 @@ function Cart() {
         {updateCart && updateCart.products.map(product => {
           return (
             <Grid key={product.id} xs={4}>
-              <Paper sx={{ height: "100%", display: "flex", alignItems: "center" }}>
+              <Paper sx={{ height: "100%", display: "flex", alignContent: "space-around" }}>
                 <Link to={`/product/${product.id}`}>
-                  <Box>
-                    <img src={product.image} width={100} alt="" />
-                    <p>{product.title}</p>
-                    <p>Quantity: {product.quantity}</p>
+                  <Box sx={{ padding: "10px", display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <img src={product.image} width={100} height={100} alt="" />
+                    <Typography variant="body1" sx={{ textAlign: 'center' }}>{product.title}</Typography>
+                    <Typography variant="body1" sx={{ textAlign: 'center' }}>Quantity: {product.quantity}</Typography>
                   </Box>
                 </Link>
               </Paper>
