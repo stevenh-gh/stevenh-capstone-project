@@ -1,3 +1,5 @@
+import { Box, Paper } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getCart, getProduct } from "../api";
@@ -36,18 +38,24 @@ function Cart() {
   return (
     <>
       <Header txt={"Cart"} />
-      {/* updateCart && console.log(updateCart) */}
-      {updateCart && updateCart.products.map(product => {
-        return (
-          <div key={product.id}>
-            <Link to={`/product/${product.id}`}>
-              <img src={product.image} width={100} alt="" />
-              <p>{product.title}</p>
-              <p>Quantity: {product.quantity}</p>
-            </Link>
-          </div>
-        );
-      })}
+      <Grid container spacing={3}>
+        {/* updateCart && console.log(updateCart) */}
+        {updateCart && updateCart.products.map(product => {
+          return (
+            <Grid key={product.id} xs={4}>
+              <Paper sx={{ height: "100%", display: "flex", alignItems: "center" }}>
+                <Link to={`/product/${product.id}`}>
+                  <Box>
+                    <img src={product.image} width={100} alt="" />
+                    <p>{product.title}</p>
+                    <p>Quantity: {product.quantity}</p>
+                  </Box>
+                </Link>
+              </Paper>
+            </Grid>
+          );
+        })}
+      </Grid>
     </>
   );
 }

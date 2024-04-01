@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 function ProductPreview({ product }) {
   return (
-    <Grid>
-      <Paper>
+    <Grid xs={3}>
+      <Paper sx={{ height: "100%", display: "flex", alignItems: "center" }}>
         <Link to={`/product/${product.id}`}>
           <Box>
             <img src={product.image} width={100} alt="" />

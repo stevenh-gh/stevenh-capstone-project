@@ -18,7 +18,7 @@ function ShowProducts() {
   return (
     <>
       <h3>All products</h3>
-      <Grid2 container>
+      <Grid2 container spacing={3}>
         {products.length > 0 && products.map(product => <ProductPreview key={product.id} product={product} />)}
       </Grid2>
     </>
