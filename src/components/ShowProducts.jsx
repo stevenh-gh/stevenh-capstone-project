@@ -1,3 +1,4 @@
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { useEffect } from "react";
 import { useState } from "react";
 import { getProducts } from "../api";
@@ -17,7 +18,9 @@ function ShowProducts() {
   return (
     <>
       <h3>All products</h3>
-      {products.length > 0 && products.map(product => <ProductPreview key={product.id} product={product} />)}
+      <Grid2 container>
+        {products.length > 0 && products.map(product => <ProductPreview key={product.id} product={product} />)}
+      </Grid2>
     </>
   );
 }
