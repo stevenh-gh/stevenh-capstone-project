@@ -1,0 +1,64 @@
+const URL = "https://fakestoreapi.com";
+
+export async function getProducts() {
+  try {
+    const res = await fetch(`${URL}/products`);
+    const json = await res.json();
+    return json;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function login(loginData) {
+  try {
+    const res = await fetch(`${URL}/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginData),
+    });
+    const json = await res.json();
+    return json;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function signup(signupData) {
+  try {
+    const res = await fetch(`${URL}/users`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signupData),
+    });
+    const json = await res.json();
+    return json;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+// accepts userid for now, should accept token
+export async function getCart(userId) {
+  try {
+    const res = await fetch(`${URL}/carts/user/${userId}`);
+    const json = await res.json();
+    return json;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getProduct(id) {
+  try {
+    const res = await fetch(`${URL}/products/${id}`);
+    const json = await res.json();
+    return json;
+  } catch (err) {
+    console.log(err);
+  }
+}
