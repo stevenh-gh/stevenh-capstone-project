@@ -1,7 +1,8 @@
+import Grid from "@mui/material/Unstable_Grid2";
+import ProductPreview from "./ProductPreview";
+import { getProducts } from "../api";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getProducts } from "../api";
-import ProductPreview from "./ProductPreview";
 
 function ShowProducts() {
   const [products, setProducts] = useState([]);
@@ -17,7 +18,9 @@ function ShowProducts() {
   return (
     <>
       <h3>All products</h3>
-      {products.length > 0 && products.map(product => <ProductPreview key={product.id} product={product} />)}
+      <Grid container spacing={3}>
+        {products.length > 0 && products.map(product => <ProductPreview key={product.id} product={product} />)}
+      </Grid>
     </>
   );
 }

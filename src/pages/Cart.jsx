@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Box, Paper } from "@mui/material";
 import { getCart, getProduct } from "../api";
+import { useEffect, useState } from "react";
+
+import Grid from "@mui/material/Unstable_Grid2";
 import Header from "../components/Header";
+import { Link } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 function Cart() {
   const [cart, setCart] = useState(null);
@@ -36,18 +40,24 @@ function Cart() {
   return (
     <>
       <Header txt={"Cart"} />
-      {/* updateCart && console.log(updateCart) */}
-      {updateCart && updateCart.products.map(product => {
-        return (
-          <div key={product.id}>
-            <Link to={`/product/${product.id}`}>
-              <img src={product.image} width={100} alt="" />
-              <p>{product.title}</p>
-              <p>Quantity: {product.quantity}</p>
-            </Link>
-          </div>
-        );
-      })}
+      <Grid container spacing={3}>
+        {/* updateCart && console.log(updateCart) */}
+        {updateCart && updateCart.products.map(product => {
+          return (
+            <Grid key={product.id} xs={4}>
+              <Paper sx={{ height: "100%", display: "flex", alignContent: "space-around" }}>
+                <Link to={`/product/${product.id}`}>
+                  <Box sx={{ padding: "10px", display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <img src={product.image} width={100} height={100} alt="" />
+                    <Typography variant="body1" sx={{ textAlign: 'center' }}>{product.title}</Typography>
+                    <Typography variant="body1" sx={{ textAlign: 'center' }}>Quantity: {product.quantity}</Typography>
+                  </Box>
+                </Link>
+              </Paper>
+            </Grid>
+          );
+        })}
+      </Grid>
     </>
   );
 }
