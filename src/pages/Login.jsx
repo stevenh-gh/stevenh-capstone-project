@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { login } from "../api";
 import Header from "../components/Header";
+import { Typography } from "@mui/material";
+import { login } from "../api";
+import { useState } from "react";
 
 function Login({ setToken }) {
   const [username, setUsername] = useState("");
@@ -17,13 +18,15 @@ function Login({ setToken }) {
   return (
     <>
       <Header txt={"Login"} />
-      <form onSubmit={e => submit(e, { username, password })}>
-        <label htmlFor="username">Username</label>
-        <input onChange={e => setUsername(e.target.value)} type="text" id="username" />
-        <label htmlFor="password">Password</label>
-        <input onChange={e => setPassword(e.target.value)} type="password" id="password" />
-        <button type="submit">Log in</button>
-      </form>
+      <Typography variant='body1'>
+        <form onSubmit={e => submit(e, { username, password })}>
+          <label htmlFor="username">Username</label>
+          <input onChange={e => setUsername(e.target.value)} type="text" id="username" />
+          <label htmlFor="password">Password</label>
+          <input onChange={e => setPassword(e.target.value)} type="password" id="password" />
+          <button type="submit">Log in</button>
+        </form>
+      </Typography>
     </>
   );
 }
