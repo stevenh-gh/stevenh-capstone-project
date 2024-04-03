@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Button, Divider, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { Menu } from "@mui/material";
@@ -23,7 +23,7 @@ function SFMenu() {
   };
 
   const handleClose = (e) => {
-    console.log(e.target.innerText)
+    e.target.innerText === 'Reset' ? setFilter(null) : setFilter(e.target.innerText)
     setEnchorEl(null);
   };
 
@@ -46,6 +46,8 @@ function SFMenu() {
         onClose={handleClose}
         MenuListProps={{ "aria-labelledby": "basic-button" }}
       >
+        <MenuItem onClick={handleClose}>Reset</MenuItem>
+        <Divider />
         <MenuItem sx={{ fontVariant: 'small-caps' }}>category</MenuItem>
         {categories && categories.map((category, id) => <MenuItem key={id} onClick={handleClose}>{category}</MenuItem>)}        {/* {categories && console.log(categories)} */}
       </Menu>
