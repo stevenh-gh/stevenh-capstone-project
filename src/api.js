@@ -62,3 +62,13 @@ export async function getProduct(id) {
     console.log(err);
   }
 }
+
+export async function getCategories() {
+  try {
+    const res = await fetch(`${URL}/products/categories`)
+    const json = await res.json();
+    return json;
+  } catch (err) {
+    console.log(err)
+  }
+}
