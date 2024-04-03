@@ -1,10 +1,10 @@
-import { Button, Divider } from "@mui/material";
+import { Button, Divider, tableSortLabelClasses } from "@mui/material";
 
 import { Menu } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import { useState } from "react";
 
-function SortMenu({ setSort }) {
+function SortMenu({ sort, setSort, sortPriceDir, setSortPriceDir }) {
   const [anchorEl, setEnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -14,6 +14,7 @@ function SortMenu({ setSort }) {
 
   const handleClose = (e) => {
     e.target.innerText === 'Reset' ? setSort(null) : setSort(e.target.innerText)
+    sort.includes('price') && setSortPriceDir(-sortPriceDir);
     // console.log(e.target.innerText)
     setEnchorEl(null);
   };
@@ -39,7 +40,7 @@ function SortMenu({ setSort }) {
       >
         <MenuItem onClick={handleClose}>Reset</MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>price</MenuItem>
+        <MenuItem onClick={handleClose}>price {sortPriceDir > 0 ? '(descending)' : '(ascending)'}</MenuItem>
       </Menu>
     </div>
   );
