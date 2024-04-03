@@ -5,7 +5,7 @@ import { Menu } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import { getCategories } from "../api";
 
-function SFMenu({ setFilter }) {
+function FilterMenu({ setFilter }) {
   const [anchorEl, setEnchorEl] = useState(null);
   const [categories, setCategories] = useState(null)
   const open = Boolean(anchorEl);
@@ -55,4 +55,4 @@ function SFMenu({ setFilter }) {
   );
 }
 
-export default SFMenu;
+export default FilterMenu;

@@ -1,4 +1,4 @@
-import SFMenu from "../components/SFMenu";
+import FilterMenu from "../components/FilterMenu";
 import ShowProducts from "../components/ShowProducts";
 import { useState } from "react";
 
@@ -7,7 +7,7 @@ function Home() {
 
   return (
     <>
-      <SFMenu setFilter={setFilter} />
+      <FilterMenu setFilter={setFilter} />
       <ShowProducts filter={filter} />
     </>
   );
