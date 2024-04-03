@@ -1,11 +1,22 @@
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+
 import { Menu } from "@mui/material";
 import { MenuItem } from "@mui/material";
-import { useState } from "react";
+import { getCategories } from "../api";
 
 function SFMenu() {
   const [anchorEl, setEnchorEl] = useState(null);
+  const [categories, setCategories] = useState(null)
   const open = Boolean(anchorEl);
+
+  useEffect(() => {
+    async function gc() {
+      const json = await getCategories();
+      setCategories(json);
+    }
+    gc();
+  }, [])
 
   const handleClick = (e) => {
     setEnchorEl(e.currentTarget);
@@ -35,7 +46,8 @@ function SFMenu() {
         onClose={handleClose}
         MenuListProps={{ "aria-labelledby": "basic-button" }}
       >
-        <MenuItem onClick={handleClose}>Category</MenuItem>
+        <MenuItem sx={{ fontVariant: 'small-caps' }}>category</MenuItem>
+        {categories && categories.map((category, id) => <MenuItem key={id} onClick={handleClose}>{category}</MenuItem>)}        {/* {categories && console.log(categories)} */}
       </Menu>
     </div>
   );
