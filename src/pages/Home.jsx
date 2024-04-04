@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import FilterMenu from "../components/FilterMenu";
 import ShowProducts from "../components/ShowProducts";
 import SortMenu from "../components/SortMenu";
@@ -10,8 +11,10 @@ function Home() {
 
   return (
     <>
-      <FilterMenu setFilter={setFilter} />
-      <SortMenu sortPriceDir={sortPriceDir} setSortPriceDir={setSortPriceDir} sort={sort} setSort={setSort} />
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <FilterMenu setFilter={setFilter} />
+        <SortMenu sortPriceDir={sortPriceDir} setSortPriceDir={setSortPriceDir} sort={sort} setSort={setSort} />
+      </Box>
       <ShowProducts filter={filter} sort={sort} sortPriceDir={sortPriceDir} />
     </>
   );
