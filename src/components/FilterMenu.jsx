@@ -1,6 +1,7 @@
 import { Button, Divider, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
+import { FilterAlt } from "@mui/icons-material";
 import { Menu } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import { getCategories } from "../api";
@@ -36,7 +37,7 @@ function FilterMenu({ setFilter }) {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        Filter by
+        Filter by <FilterAlt />
       </Button>
 
       <Menu

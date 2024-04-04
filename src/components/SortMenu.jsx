@@ -1,7 +1,8 @@
-import { Button, Divider, tableSortLabelClasses } from "@mui/material";
+import { Button, Divider } from "@mui/material";
 
 import { Menu } from "@mui/material";
 import { MenuItem } from "@mui/material";
+import SortIcon from "@mui/icons-material/Sort"
 import { useState } from "react";
 
 function SortMenu({ sort, setSort, sortPriceDir, setSortPriceDir }) {
@@ -28,7 +29,7 @@ function SortMenu({ sort, setSort, sortPriceDir, setSortPriceDir }) {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        Sort by
+        Sort by <SortIcon />
       </Button>
 
       <Menu
