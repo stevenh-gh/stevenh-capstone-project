@@ -23,6 +23,10 @@ function FilterMenu({ setFilter }) {
     setEnchorEl(e.currentTarget);
   };
 
+  const handleExit = () => {
+    setEnchorEl(null)
+  }
+
   const handleClose = (e) => {
     e.target.innerText === 'Reset' ? setFilter(null) : setFilter(e.target.innerText)
     setEnchorEl(null);
@@ -44,7 +48,7 @@ function FilterMenu({ setFilter }) {
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
-        onClose={handleClose}
+        onClose={handleExit}
         MenuListProps={{ "aria-labelledby": "basic-button" }}
       >
         <MenuItem onClick={handleClose}>Reset</MenuItem>

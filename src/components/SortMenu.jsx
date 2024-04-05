@@ -13,6 +13,10 @@ function SortMenu({ sort, setSort, sortPriceDir, setSortPriceDir }) {
     setEnchorEl(e.currentTarget);
   };
 
+  const handleExit = () => {
+    setEnchorEl(null)
+  }
+
   const handleClose = (e) => {
     e.target.innerText === 'Reset' ? setSort(null) : setSort(e.target.innerText)
     sort.includes('price') && setSortPriceDir(-sortPriceDir);
@@ -36,7 +40,7 @@ function SortMenu({ sort, setSort, sortPriceDir, setSortPriceDir }) {
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
-        onClose={handleClose}
+        onClose={handleExit}
         MenuListProps={{ "aria-labelledby": "basic-button" }}
       >
         <MenuItem onClick={handleClose}>Reset</MenuItem>
