@@ -10,4 +10,5 @@ export function addToCart(id) {
     cartProds.push({ productId: id, quantity: 1 });
   }
   window.localStorage.setItem('cart', JSON.stringify(cart))
+  // TODO: if db is implemented, add product to db cart
 }
