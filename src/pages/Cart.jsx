@@ -8,7 +8,8 @@ import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 
 function Cart() {
-  const [cart, setCart] = useState(null);
+  !window.localStorage.getItem('cart') && window.localStorage.setItem('cart', '')
+  const [cart, setCart] = useState(window.localStorage.getItem('cart'));
   const [updateCart, setUpdateCart] = useState(null);
 
   useEffect(() => {
@@ -16,16 +17,21 @@ function Cart() {
     async function gc() {
       const json = await getCart(1);
       // access 0th element for now, should only have one cart
-      setCart(json[0]);
+      window.localStorage.setItem('cart', JSON.stringify(json[0]))
+      setCart(window.localStorage.getItem('cart'))
     }
-    gc();
+    !window.localStorage.getItem('cart') && gc();
   }, []);
+
+  useEffect(() => {
+    setCart(window.localStorage.getItem('cart'))
+  }, [window.localStorage.getItem('cart')])
 
   useEffect(() => {
     async function gp() {
       if (cart) {
         const res = await Promise.all(
-          cart.products.map(async product => {
+          JSON.parse(cart).products.map(async product => {
             const p = await getProduct(product.productId);
             return { ...p, quantity: product.quantity };
           }),

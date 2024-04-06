@@ -5,6 +5,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
+import { addToCart } from "../helpers";
 
 function ProductPreview({ product }) {
   return (
@@ -16,7 +17,7 @@ function ProductPreview({ product }) {
             <Typography variant="body1" sx={{ textAlign: 'center' }}>{product.title} - ${product.price}</Typography>
           </Box>
         </Link>
-        <IconButton onClick={() => console.log(product.id)}>
+        <IconButton onClick={() => addToCart(product.id)}>
           <AddShoppingCart />
         </IconButton>
       </Paper>
