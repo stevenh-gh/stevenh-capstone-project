@@ -1,7 +1,8 @@
-import { Box, Paper } from "@mui/material";
+import { Box, IconButton, Paper } from "@mui/material";
 import { getCart, getProduct } from "../api";
 import { useEffect, useState } from "react";
 
+import DeleteIcon from "@mui/icons-material/Delete"
 import Grid from "@mui/material/Unstable_Grid2";
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
@@ -43,6 +44,16 @@ function Cart() {
     gp();
   }, [cart]);
 
+  function removeProduct(id) {
+    let cart = window.localStorage.getItem('cart');
+    cart = JSON.parse(cart)
+    const cartProd = cart.products;
+    const filteredCart = cartProd.filter(product => product.productId !== id);
+    cart = { ...cart, products: filteredCart }
+    window.localStorage.setItem('cart', JSON.stringify(cart))
+    setCart(window.localStorage.getItem('cart'))
+  }
+
   return (
     <>
       <Header txt={"Cart"} />
@@ -59,6 +70,9 @@ function Cart() {
                     <Typography variant="body1" sx={{ textAlign: 'center' }}>Quantity: {product.quantity}</Typography>
                   </Box>
                 </Link>
+                <IconButton onClick={() => removeProduct(product.id)}>
+                  <DeleteIcon />
+                </IconButton>
               </Paper>
             </Grid>
           );
