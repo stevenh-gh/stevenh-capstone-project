@@ -3,6 +3,7 @@ import { getCart, getProduct } from "../api";
 import { useEffect, useState } from "react";
 
 import DeleteIcon from "@mui/icons-material/Delete"
+import EditCartProductMenu from "../components/EditCartProductMenu";
 import Grid from "@mui/material/Unstable_Grid2";
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
@@ -70,9 +71,12 @@ function Cart() {
                     <Typography variant="body1" sx={{ textAlign: 'center' }}>Quantity: {product.quantity}</Typography>
                   </Box>
                 </Link>
-                <IconButton onClick={() => removeProduct(product.id)}>
-                  <DeleteIcon />
-                </IconButton>
+                <Box>
+                  <IconButton onClick={() => removeProduct(product.id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                  <EditCartProductMenu setCart={setCart} id={product.id} quantity={product.quantity} />
+                </Box>
               </Paper>
             </Grid>
           );
