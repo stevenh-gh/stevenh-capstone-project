@@ -35,6 +35,12 @@ function EditCartProductMenu({ id, quantity, setCart }) {
     val > 1 && setProductQuantity(val);
   }
 
+  const enterKeyDown = e => {
+    if (e.code === 'Enter') {
+      handleClose(e)
+    }
+  }
+
   return (
     <div>
       <Button
@@ -54,7 +60,7 @@ function EditCartProductMenu({ id, quantity, setCart }) {
         onClose={handleClose}
         MenuListProps={{ "aria-labelledby": "basic-button" }}
       >
-        <MenuItem>
+        <MenuItem onKeyDown={enterKeyDown}>
           <TextField onChange={handleInput} inputProps={{ type: 'number', defaultValue: quantity }} />
         </MenuItem>
       </Menu>
