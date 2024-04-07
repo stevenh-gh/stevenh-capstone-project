@@ -30,6 +30,7 @@ function EditCartProductMenu({ id, quantity, setCart }) {
   }
 
   const handleInput = e => {
+    console.log(e.target.value)
     let val = Number(e.target.value);
     val > 1 && setProductQuantity(val);
   }
@@ -53,8 +54,8 @@ function EditCartProductMenu({ id, quantity, setCart }) {
         onClose={handleClose}
         MenuListProps={{ "aria-labelledby": "basic-button" }}
       >
-        <MenuItem onClick={handleInput}>
-          <TextField inputProps={{ type: 'number', defaultValue: quantity }} />
+        <MenuItem>
+          <TextField onChange={handleInput} inputProps={{ type: 'number', defaultValue: quantity }} />
         </MenuItem>
       </Menu>
     </div>
