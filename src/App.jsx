@@ -3,6 +3,7 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 import { Container } from "@mui/material";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -28,6 +29,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path='/checkout' element={<Checkout />} />
       </Routes>
     </Container>
   );
