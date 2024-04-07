@@ -4,7 +4,7 @@ import ShowProducts from "../components/ShowProducts";
 import SortMenu from "../components/SortMenu";
 import { useState } from "react";
 
-function Home() {
+function Home({ token }) {
   const [filter, setFilter] = useState('')
   const [sort, setSort] = useState('')
   const [sortPriceDir, setSortPriceDir] = useState(-1);
@@ -15,7 +15,7 @@ function Home() {
         <FilterMenu setFilter={setFilter} />
         <SortMenu sortPriceDir={sortPriceDir} setSortPriceDir={setSortPriceDir} sort={sort} setSort={setSort} />
       </Box>
-      <ShowProducts filter={filter} sort={sort} sortPriceDir={sortPriceDir} />
+      <ShowProducts token={token} filter={filter} sort={sort} sortPriceDir={sortPriceDir} />
     </>
   );
 }

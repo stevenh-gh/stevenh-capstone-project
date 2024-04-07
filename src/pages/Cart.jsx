@@ -1,14 +1,17 @@
-import { Box, Paper } from "@mui/material";
+import { Box, IconButton, Paper } from "@mui/material";
 import { getCart, getProduct } from "../api";
 import { useEffect, useState } from "react";
 
+import DeleteIcon from "@mui/icons-material/Delete"
+import EditCartProductMenu from "../components/EditCartProductMenu";
 import Grid from "@mui/material/Unstable_Grid2";
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
 import { Typography } from "@mui/material";
 
 function Cart() {
-  const [cart, setCart] = useState(null);
+  !window.localStorage.getItem('cart') && window.localStorage.setItem('cart', '')
+  const [cart, setCart] = useState(window.localStorage.getItem('cart'));
   const [updateCart, setUpdateCart] = useState(null);
 
   useEffect(() => {
@@ -16,16 +19,21 @@ function Cart() {
     async function gc() {
       const json = await getCart(1);
       // access 0th element for now, should only have one cart
-      setCart(json[0]);
+      window.localStorage.setItem('cart', JSON.stringify(json[0]))
+      setCart(window.localStorage.getItem('cart'))
     }
-    gc();
+    !window.localStorage.getItem('cart') && gc();
   }, []);
+
+  useEffect(() => {
+    setCart(window.localStorage.getItem('cart'))
+  }, [window.localStorage.getItem('cart')])
 
   useEffect(() => {
     async function gp() {
       if (cart) {
         const res = await Promise.all(
-          cart.products.map(async product => {
+          JSON.parse(cart).products.map(async product => {
             const p = await getProduct(product.productId);
             return { ...p, quantity: product.quantity };
           }),
@@ -36,6 +44,16 @@ function Cart() {
     }
     gp();
   }, [cart]);
+
+  function removeProduct(id) {
+    let cart = window.localStorage.getItem('cart');
+    cart = JSON.parse(cart)
+    const cartProd = cart.products;
+    const filteredCart = cartProd.filter(product => product.productId !== id);
+    cart = { ...cart, products: filteredCart }
+    window.localStorage.setItem('cart', JSON.stringify(cart))
+    setCart(window.localStorage.getItem('cart'))
+  }
 
   return (
     <>
@@ -53,6 +71,12 @@ function Cart() {
                     <Typography variant="body1" sx={{ textAlign: 'center' }}>Quantity: {product.quantity}</Typography>
                   </Box>
                 </Link>
+                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                  <IconButton onClick={() => removeProduct(product.id)}>
+                    <DeleteIcon />
+                  </IconButton>
+                  <EditCartProductMenu setCart={setCart} id={product.id} quantity={product.quantity} />
+                </Box>
               </Paper>
             </Grid>
           );
