@@ -1,4 +1,4 @@
-import { Box, IconButton, Paper } from "@mui/material";
+import { Box, Button, IconButton, Paper } from "@mui/material";
 import { getCart, getProduct } from "../api";
 import { useEffect, useState } from "react";
 
@@ -7,6 +7,7 @@ import EditCartProductMenu from "../components/EditCartProductMenu";
 import Grid from "@mui/material/Unstable_Grid2";
 import Header from "../components/Header";
 import { Link } from "react-router-dom";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { Typography } from "@mui/material";
 
 function Cart() {
@@ -57,7 +58,10 @@ function Cart() {
 
   return (
     <>
-      <Header txt={"Cart"} />
+      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Header txt={"Cart"} />
+        <Button size="large" variant="contained">Proceed to checkout <ShoppingCartCheckoutIcon sx={{ marginLeft: '15px' }} /></Button>
+      </Box>
       <Grid container spacing={3}>
         {/* updateCart && console.log(updateCart) */}
         {updateCart && updateCart.products.map(product => {
