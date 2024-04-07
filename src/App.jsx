@@ -1,14 +1,16 @@
-import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Container } from "@mui/material";
-import { useState } from "react";
-import Header from "./components/Header";
-import Navbar from "./components/Navbar";
+
+import { Route, Routes } from "react-router-dom";
+
 import Cart from "./pages/Cart";
+import { Container } from "@mui/material";
+import Header from "./components/Header";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Navbar from "./components/Navbar";
 import ProductDetails from "./pages/ProductDetails";
 import Signup from "./pages/Signup";
+import { useState } from "react";
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -21,7 +23,7 @@ function App() {
       <Navbar token={token} setToken={setToken} />
       <Header txt={"tentative e-shop title"} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home token={token} />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/cart" element={<Cart />} />

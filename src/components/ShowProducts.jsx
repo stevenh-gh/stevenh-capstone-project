@@ -4,7 +4,7 @@ import { getProducts } from "../api";
 import { useEffect } from "react";
 import { useState } from "react";
 
-function ShowProducts({ filter, sort, sortPriceDir }) {
+function ShowProducts({ filter, sort, sortPriceDir, token }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function ShowProducts({ filter, sort, sortPriceDir }) {
 
     return (
       <>
-        {prod.map(product => <ProductPreview key={product.id} product={product} />)}
+        {prod.map(product => <ProductPreview key={product.id} product={product} token={token} />)}
         {/* {sort && console.log('sort val:', sort)}
         {!filter ? prod.map(product => <ProductPreview key={product.id} product={product} />)
           : products.filter(product => product.category === filter).map(product => <ProductPreview key={product.id} product={product} />)} */}
