@@ -1,4 +1,5 @@
 import { Box, Paper } from "@mui/material";
+import { SnackbarProvider, enqueueSnackbar } from "notistack";
 
 import { AddShoppingCart } from "@mui/icons-material";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -8,6 +9,10 @@ import { Typography } from "@mui/material";
 import { addToCart } from "../helpers";
 
 function ProductPreview({ product, token }) {
+  function handleClick(id, title) {
+    addToCart(id)
+    enqueueSnackbar(`Added ${title} to cart`);
+  }
   return (
     <Grid xs={3}>
       <Paper sx={{ height: "100%", display: "flex", justifyContent: 'space-between', flexDirection: 'column', alignItems: "center" }}>
@@ -18,10 +23,13 @@ function ProductPreview({ product, token }) {
           </Box>
         </Link>
         {token &&
-          <IconButton onClick={() => addToCart(product.id)}>
+          <IconButton onClick={() => handleClick(product.id, product.title)}>
             <AddShoppingCart />
           </IconButton>
         }
+        <Typography>
+          <SnackbarProvider />
+        </Typography>
       </Paper>
     </Grid>
   );
