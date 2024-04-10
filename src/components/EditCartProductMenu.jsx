@@ -1,4 +1,5 @@
-import { Button, TextField } from "@mui/material"
+import { Button, TextField, Typography } from "@mui/material"
+import { SnackbarProvider, enqueueSnackbar } from "notistack"
 
 import EditIcon from '@mui/icons-material/Edit'
 import { Menu } from "@mui/material"
@@ -26,6 +27,7 @@ function EditCartProductMenu({ id, quantity, setCart }) {
       }
       window.localStorage.setItem('cart', JSON.stringify(cart))
       setCart(window.localStorage.getItem('cart'))
+      enqueueSnackbar(`Successfully updated the quantity to ${prodObj.quantity}`);
     }
   }
 
@@ -64,6 +66,9 @@ function EditCartProductMenu({ id, quantity, setCart }) {
           <TextField onChange={handleInput} inputProps={{ type: 'number', defaultValue: quantity }} />
         </MenuItem>
       </Menu>
+      <Typography>
+        <SnackbarProvider />
+      </Typography>
     </div>
   )
 }
