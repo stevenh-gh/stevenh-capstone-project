@@ -17,7 +17,7 @@ function EditCartProductMenu({ id, quantity, setCart }) {
 
   const handleClose = () => {
     setAnchorEl(null)
-    if (!quantity !== productQuantity) {
+    if (quantity !== productQuantity) {
       let cart = window.localStorage.getItem('cart');
       cart = JSON.parse(cart);
       let cartProds = cart.products;
