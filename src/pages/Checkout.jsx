@@ -1,10 +1,38 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Button, Divider, IconButton, Snackbar, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
+import CloseIcon from '@mui/icons-material/Close'
 import { getProduct } from "../api";
+import { useNavigate } from "react-router-dom";
 
 function Checkout() {
   const [checkout, setCheckout] = useState(null)
+  const [total, setTotal] = useState(0);
+  const [sbOpen, setSbOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    setSbOpen(true)
+    setTimeout(() => {
+      window.localStorage.removeItem('cart')
+      navigate('/')
+    }, 3000)
+  }
+
+  const handleClose = (e, r) => {
+    if (r === 'clickaway') {
+      return;
+    }
+    setSbOpen(false)
+  }
+
+  const action = (
+    <>
+      <IconButton onClick={handleClose}>
+        <CloseIcon fontSize='small' />
+      </IconButton>
+    </>
+  )
 
   useEffect(() => {
     async function gp() {
@@ -16,6 +44,7 @@ function Checkout() {
         })
       )
       setCheckout(products);
+      setTotal(products.reduce((acc, cur) => acc + (cur.quantity * cur.price), 0))
     }
     gp();
   }, [])
@@ -44,9 +73,19 @@ function Checkout() {
         })}
         <Divider />
         <Typography variant="h4" sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          Total: ${checkout && (checkout.reduce((acc, cur) => acc + (cur.quantity * cur.price), 0)).toFixed(2)}
+          Total: ${total !== null && total !== 0 && total.toFixed(2)}
         </Typography>
       </Box >
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Button sx={{ textTransform: 'uppercase' }} size="large" variant="contained" onClick={handleClick}>buy now</Button>
+      </Box>
+      <Snackbar
+        open={sbOpen}
+        onClose={handleClose}
+        message={`Your purchase of \$${total} has been made! You will be redirected to the homepage soon.`}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        action={action}
+        autoHideDuration={3000} />
     </>
   )
 }
