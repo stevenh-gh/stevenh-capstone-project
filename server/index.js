@@ -24,7 +24,7 @@ const app = express();
 app.use(express.json())
 app.use(morgan('dev'))
 
-app.post('/auth/login', async (req, res, next) => {
+app.post('/api/auth/login', async (req, res, next) => {
   try {
     res.send(await authenticate(req.body))
   } catch (err) {
@@ -32,7 +32,7 @@ app.post('/auth/login', async (req, res, next) => {
   }
 })
 
-app.get('/users', async (req, res, next) => {
+app.get('/api/users', async (req, res, next) => {
   try {
     res.send(await getAllUsers());
   } catch (err) {
@@ -40,7 +40,7 @@ app.get('/users', async (req, res, next) => {
   }
 })
 
-app.post('/users', async (req, res, next) => {
+app.post('/api/users', async (req, res, next) => {
   try {
     res.send(await createUser(req.body))
   } catch (err) {
@@ -48,7 +48,7 @@ app.post('/users', async (req, res, next) => {
   }
 })
 
-app.get('/products/categories', async (req, res, next) => {
+app.get('/api/products/categories', async (req, res, next) => {
   try {
     res.send(await getAllCategories());
   } catch (err) {
@@ -56,7 +56,7 @@ app.get('/products/categories', async (req, res, next) => {
   }
 })
 
-app.get('/products', async (req, res, next) => {
+app.get('/api/products', async (req, res, next) => {
   try {
     res.send(await getAllProducts())
   } catch (err) {
@@ -64,7 +64,7 @@ app.get('/products', async (req, res, next) => {
   }
 })
 
-app.get('/products/:id', async (req, res, next) => {
+app.get('/api/products/:id', async (req, res, next) => {
   try {
     res.send(await getProduct(req.params.id))
   } catch (err) {
@@ -72,7 +72,7 @@ app.get('/products/:id', async (req, res, next) => {
   }
 })
 
-app.get('/carts', async (req, res, next) => {
+app.get('/api/carts', async (req, res, next) => {
   try {
     res.send(await getCarts());
   } catch (err) {
@@ -80,7 +80,7 @@ app.get('/carts', async (req, res, next) => {
   }
 })
 
-app.get('/carts/user/:userId', async (req, res, next) => {
+app.get('/api/carts/user/:userId', async (req, res, next) => {
   try {
     res.send(await getCart(req.params.userId))
   } catch (err) {
