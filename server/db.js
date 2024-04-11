@@ -59,6 +59,31 @@ const authenticate = async ({ username, password }) => {
   }
 }
 
+const findUserWithToken = async (token) => {
+  let id
+  try {
+    const tkn = jwt.decode(token)
+    id = tkn.id
+  } catch (err) {
+    const error = Error('not authorized')
+    error.status = 401
+    throw error
+  }
+
+  const sql = `
+    select id, username from "user" where id = $1;
+  `
+  const response = await client.query(sql, [id])
+  if (!response.rows.length) {
+    const err = Error('not authorized')
+    err.status = 401
+    throw err
+  }
+  else {
+    return response.rows[0]
+  }
+}
+
 const createUser = async ({ username, password }) => {
   const sql = `
     insert into "user"
@@ -184,5 +209,6 @@ export {
   createCart,
   getCarts,
   getCart,
-  authenticate
+  authenticate,
+  findUserWithToken
 }
