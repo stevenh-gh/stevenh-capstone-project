@@ -85,7 +85,14 @@ const getAllCategories = async () => {
 
 const getAllProducts = async () => {
   const sql = `
-    select * , category.name as category from product  
+    select
+      product.id as id,
+      product.title as title,
+      product.price as price,
+      product.description as description,
+      product.image as image,
+      category.name as category
+    from product
     join category on product.category_id = category.id;
   `
   const response = await client.query(sql)
