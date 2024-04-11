@@ -23,7 +23,8 @@ function ProductDetails() {
       {product && (
         <>
           <img src={product.image} width={200} alt="" />
-          <h3>{product.title} - {product.rating.rate}/5 ({product.rating.count})</h3>
+          {/* <h3>{product.title} - {product.rating.rate}/5 ({product.rating.count})</h3> */}
+          <h3>{product.title}</h3>
           <h4>${product.price}</h4>
           <p>{product.description}</p>
           <Button onClick={() => addToCart(product.id)} variant="contained" size="large">Add to cart <AddShoppingCart sx={{ marginLeft: '10px' }} /></Button>

@@ -6,6 +6,7 @@ import {
   createProduct,
   createTables,
   createUser,
+  findUserWithToken,
   getAllCategories,
   getAllProducts,
   getAllUsers,
@@ -23,6 +24,15 @@ const app = express();
 
 app.use(express.json())
 app.use(morgan('dev'))
+
+async function isLoggedIn(req, res, next) {
+  try {
+    req.user = await findUserWithToken(req.headers.authorization)
+    next()
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 app.post('/api/auth/login', async (req, res, next) => {
   try {
@@ -80,9 +90,10 @@ app.get('/api/carts', async (req, res, next) => {
   }
 })
 
-app.get('/api/carts/user/:userId', async (req, res, next) => {
+// app.get('/api/carts/user/:userId', async (req, res, next) => {
+app.get('/api/carts/user/', isLoggedIn, async (req, res, next) => {
   try {
-    res.send(await getCart(req.params.userId))
+    res.send(await getCart(req.user.id))
   } catch (err) {
     console.log(err)
   }
@@ -111,9 +122,9 @@ const init = async () => {
   await seedProducts();
   console.log('products created')
 
-  console.log('creating carts')
-  await createCart(user1.id, JSON.stringify({ productId: 1, quantity: 4 }))
-  console.log('carts created')
+  // console.log('creating carts')
+  // await createCart(user1.id, JSON.stringify({ productId: 1, quantity: 4 }))
+  // console.log('carts created')
 
   const PORT = process.env.PORT || 3000
   app.listen(PORT, () => {

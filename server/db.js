@@ -93,6 +93,7 @@ const createUser = async ({ username, password }) => {
     returning *;
   `
   const response = await client.query(sql, [uuid(), username, await bcrypt.hash(password, 5)])
+  await createCart(response.rows[0].id, JSON.stringify([]))
   return response.rows[0]
 }
 

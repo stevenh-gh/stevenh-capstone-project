@@ -11,21 +11,20 @@ import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import { Typography } from "@mui/material";
 
 function Cart() {
-  !window.localStorage.getItem('cart') && window.localStorage.setItem('cart', '')
-  const [cart, setCart] = useState(window.localStorage.getItem('cart'));
+  // !window.localStorage.getItem('cart') && window.localStorage.setItem('cart', '')
+  const [cart, setCart] = useState(null);
   const [updateCart, setUpdateCart] = useState(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    // magic user id for now, should accept token
     async function gc() {
-      const json = await getCart(1);
-      // access 0th element for now, should only have one cart
-      window.localStorage.setItem('cart', JSON.stringify(json[0]))
+      const json = await getCart();
+      window.localStorage.setItem('cart', JSON.stringify(json))
       setCart(window.localStorage.getItem('cart'))
     }
     !window.localStorage.getItem('cart') && gc();
+    // gc();
   }, []);
 
   useEffect(() => {
