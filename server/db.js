@@ -123,6 +123,35 @@ const getProduct = async (id) => {
   return response.rows[0]
 }
 
+const createCart = async (userId, products) => {
+  const sql = `
+    insert into cart
+      (id, userId, products)
+    values
+      ($1, $2, $3)
+    returning *;
+  `
+  const response = await client.query(sql, [uuid(), userId, products])
+  return response.rows[0]
+}
+
+const getCarts = async () => {
+  const sql = `
+    select * from cart;
+  `
+  const response = await client.query(sql);
+  return response.rows
+}
+
+const getCart = async (userId) => {
+  const sql = `
+    select * from cart
+    where userId = $1;
+  `
+  const response = await client.query(sql, [userId])
+  return response.rows[0]
+}
+
 export {
   client,
   createTables,
@@ -132,5 +161,8 @@ export {
   createProduct,
   getAllCategories,
   getAllProducts,
-  getProduct
+  getProduct,
+  createCart,
+  getCarts,
+  getCart,
 }

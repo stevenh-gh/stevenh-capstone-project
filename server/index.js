@@ -1,5 +1,6 @@
 import {
   client,
+  createCart,
   createCategory,
   createProduct,
   createTables,
@@ -7,6 +8,8 @@ import {
   getAllCategories,
   getAllProducts,
   getAllUsers,
+  getCart,
+  getCarts,
   getProduct
 } from './db.js';
 
@@ -52,6 +55,22 @@ app.get('/products/:id', async (req, res, next) => {
   }
 })
 
+app.get('/carts', async (req, res, next) => {
+  try {
+    res.send(await getCarts());
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+app.get('/carts/user/:userId', async (req, res, next) => {
+  try {
+    res.send(await getCart(req.params.userId))
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 const init = async () => {
   await client.connect()
   console.log('connected to db')
@@ -61,7 +80,7 @@ const init = async () => {
   console.log('tables created')
 
   console.log('creating users...')
-  await createUser({ username: 'johnd', password: 'm38rmF$' })
+  const user1 = await createUser({ username: 'johnd', password: 'm38rmF$' })
   console.log('users created')
 
   console.log('creating categories...')
@@ -74,6 +93,10 @@ const init = async () => {
   console.log('creating products...')
   await seedProducts();
   console.log('products created')
+
+  console.log('creating carts')
+  await createCart(user1.id, JSON.stringify({ productId: 1, quantity: 4 }))
+  console.log('carts created')
 
   const PORT = process.env.PORT || 3000
   app.listen(PORT, () => {
