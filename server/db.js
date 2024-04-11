@@ -49,7 +49,7 @@ const createUser = async ({ username, password }) => {
     returning *;
   `
   const response = await client.query(sql, [uuid(), username, await bcrypt.hash(password, 5)])
-  return response[0]
+  return response.rows[0]
 }
 
 const getAllUsers = async () => {
@@ -69,7 +69,7 @@ const createProduct = async ({ title, price, category, description, image }) => 
     returning *;
   `
   const response = await client.query(sql, [uuid(), title, price, category, description, image])
-  return response[0]
+  return response.rows[0]
 }
 
 const createCategory = async (name) => {
