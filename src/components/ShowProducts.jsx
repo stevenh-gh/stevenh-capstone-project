@@ -1,5 +1,6 @@
 import Grid from "@mui/material/Unstable_Grid2";
 import ProductPreview from "./ProductPreview";
+import { Typography } from "@mui/material";
 import { getProducts } from "../api";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -39,7 +40,7 @@ function ShowProducts({ filter, sort, sortPriceDir, token }) {
   return (
     <>
       {console.log('in showprod', filter)}
-      <h3>All products</h3>
+      <Typography variant="h6">All products</Typography>
       <Grid container spacing={3}>
         {products.length > 0 && displayProducts()}
       </Grid>
