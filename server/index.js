@@ -1,4 +1,5 @@
 import {
+  authenticate,
   client,
   createCart,
   createCategory,
@@ -22,6 +23,14 @@ const app = express();
 
 app.use(express.json())
 app.use(morgan('dev'))
+
+app.post('/auth/login', async (req, res, next) => {
+  try {
+    res.send(await authenticate(req.body))
+  } catch (err) {
+    console.log(err)
+  }
+})
 
 app.get('/users', async (req, res, next) => {
   try {

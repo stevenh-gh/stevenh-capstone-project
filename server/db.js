@@ -1,8 +1,10 @@
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 import pg from 'pg'
 import { v4 as uuid } from 'uuid'
 
 const client = new pg.Client(process.env.DATABASE_URL || 'postgres://localhost/e_commerce_db')
+const JWT = process.env.JWT || 'secret token'
 
 const createTables = async () => {
   const sql = `
@@ -38,6 +40,23 @@ const createTables = async () => {
     );
   `
   await client.query(sql)
+}
+
+const authenticate = async ({ username, password }) => {
+  const sql = `
+    select * from "user"
+    where username = $1;
+  `
+  const response = await client.query(sql, [username])
+  if (!response.rows.length || (await bcrypt.compare(password, response.rows[0].password)) === false) {
+    const err = Error('not authorized')
+    err.status = 401
+    throw err
+  }
+  else {
+    const token = jwt.sign({ id: response.rows[0].id }, JWT)
+    return { token }
+  }
 }
 
 const createUser = async ({ username, password }) => {
@@ -165,4 +184,5 @@ export {
   createCart,
   getCarts,
   getCart,
+  authenticate
 }
