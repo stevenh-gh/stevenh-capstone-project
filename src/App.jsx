@@ -1,10 +1,10 @@
 import "./App.css";
 
+import { Box, Container } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
-import { Container } from "@mui/material";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -18,11 +18,10 @@ function App() {
 
   return (
     <Container>
-      {/* test to let me know if i'm logged in */}
-      {token && token.length > 0 ? <p>logged in</p> : <p>not logged in</p>}
-
       <Navbar token={token} setToken={setToken} />
-      <Header txt={"tentative e-shop title"} />
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Header txt={"Steven H. E-Commerce Site"} />
+      </Box>
       <Routes>
         <Route path="/" element={<Home token={token} />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
