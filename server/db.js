@@ -28,8 +28,17 @@ const createUser = async ({ username, password }) => {
   return response[0]
 }
 
+const getAllUsers = async () => {
+  const sql = `
+    select * from "user";
+  `
+  const response = await client.query(sql);
+  return response.rows
+}
+
 export {
   client,
   createTables,
   createUser,
+  getAllUsers,
 }

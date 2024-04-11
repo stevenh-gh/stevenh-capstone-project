@@ -1,4 +1,4 @@
-import { client, createTables, createUser } from './db.js';
+import { client, createTables, createUser, getAllUsers } from './db.js';
 
 import express from 'express';
 import morgan from 'morgan'
@@ -8,6 +8,14 @@ const app = express();
 
 app.use(express.json())
 app.use(morgan('dev'))
+
+app.get('/users', async (req, res, next) => {
+  try {
+    res.send(await getAllUsers());
+  } catch (err) {
+    console.log(err)
+  }
+})
 
 const init = async () => {
   await client.connect()
