@@ -10,7 +10,7 @@ function Navbar({ token, setToken }) {
           <Box>
             <Link to="/">Home</Link>
           </Box>
-          <Box>
+          <Box sx={{ display: 'flex', gap: '10px' }}>
             {!token
               ? (
                 <>
