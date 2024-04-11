@@ -31,6 +31,14 @@ app.get('/users', async (req, res, next) => {
   }
 })
 
+app.post('/users', async (req, res, next) => {
+  try {
+    res.send(await createUser(req.body))
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 app.get('/products/categories', async (req, res, next) => {
   try {
     res.send(await getAllCategories());
