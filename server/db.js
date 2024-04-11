@@ -26,7 +26,7 @@ const createTables = async () => {
       title varchar(255) not null,
       price decimal not null,
       category_id integer references category(id) not null,
-      description varchar(255) not null,
+      description text not null,
       image varchar(255) not null
     );
   `
