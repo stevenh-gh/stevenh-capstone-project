@@ -1,8 +1,9 @@
-import { client, createTables } from './db.js';
+import { client, createTables, createUser } from './db.js';
 
 import express from 'express';
 import morgan from 'morgan'
 import path from 'path'
+
 const app = express();
 
 app.use(express.json())
@@ -15,6 +16,10 @@ const init = async () => {
   console.log('creating tables...')
   await createTables()
   console.log('tables created')
+
+  console.log('creating users...')
+  await createUser({ username: 'johnd', password: 'm38rmF$' })
+  console.log('users created')
 
   const PORT = process.env.PORT || 3000
   app.listen(PORT, () => {
