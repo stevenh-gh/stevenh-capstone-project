@@ -1,4 +1,5 @@
-const URL = "https://fakestoreapi.com";
+// const URL = "https://fakestoreapi.com";
+const URL = "/api";
 
 export async function getProducts() {
   try {
