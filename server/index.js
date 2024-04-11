@@ -12,6 +12,7 @@ import {
 import express from 'express';
 import morgan from 'morgan'
 import path from 'path'
+import seedProducts from './seedProducts.js';
 
 const app = express();
 
@@ -62,13 +63,7 @@ const init = async () => {
   console.log('categories created')
 
   console.log('creating products...')
-  await createProduct({
-    title: "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-    price: 109.95,
-    description: "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-    category: 3,
-    image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-  })
+  await seedProducts();
   console.log('products created')
 
   const PORT = process.env.PORT || 3000
