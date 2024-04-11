@@ -19,7 +19,7 @@ function SortMenu({ sort, setSort, sortPriceDir, setSortPriceDir }) {
 
   const handleClose = (e) => {
     e.target.innerText === 'Reset' ? setSort(null) : setSort(e.target.innerText)
-    sort.includes('price') && setSortPriceDir(-sortPriceDir);
+    sort && sort.includes('price') && setSortPriceDir(-sortPriceDir);
     // console.log(e.target.innerText)
     setEnchorEl(null);
   };
