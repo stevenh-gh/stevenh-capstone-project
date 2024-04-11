@@ -82,7 +82,7 @@ function Checkout() {
       <Snackbar
         open={sbOpen}
         onClose={handleClose}
-        message={`Your purchase of \$${total} has been made! You will be redirected to the homepage soon.`}
+        message={`Your purchase of \$${total.toFixed(2)} has been made! You will be redirected to the homepage soon.`}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         action={action}
         autoHideDuration={3000} />
