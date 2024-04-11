@@ -1,4 +1,13 @@
-import { client, createCategory, createProduct, createTables, createUser, getAllCategories, getAllProducts, getAllUsers } from './db.js';
+import {
+  client,
+  createCategory,
+  createProduct,
+  createTables,
+  createUser,
+  getAllCategories,
+  getAllProducts,
+  getAllUsers
+} from './db.js';
 
 import express from 'express';
 import morgan from 'morgan'
