@@ -1,4 +1,11 @@
+function createCart(id) {
+  const jsonObj = { id: 1, userId: id, products: [] };
+  const json = JSON.stringify(jsonObj);
+  return json;
+}
+
 export function addToCart(id) {
+  !window.localStorage.getItem('cart') && window.localStorage.setItem('cart', createCart(id));
   let cart = window.localStorage.getItem('cart')
   cart = JSON.parse(cart)
   let cartProds = cart.products

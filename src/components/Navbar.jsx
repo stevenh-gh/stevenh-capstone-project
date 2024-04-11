@@ -18,7 +18,10 @@ function Navbar({ token, setToken }) {
                   <Link to="/login">Login</Link>
                 </>
               )
-              : <Link onClick={() => setToken(null)}>Logout</Link>}
+              : <Link onClick={() => {
+                setToken(null)
+                window.localStorage.removeItem('token')
+              }}>Logout</Link>}
             {token && <Link to='/cart'>Cart</Link>}
           </Box>
         </Box>
