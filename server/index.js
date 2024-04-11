@@ -6,7 +6,8 @@ import {
   createUser,
   getAllCategories,
   getAllProducts,
-  getAllUsers
+  getAllUsers,
+  getProduct
 } from './db.js';
 
 import express from 'express';
@@ -38,6 +39,14 @@ app.get('/products/categories', async (req, res, next) => {
 app.get('/products', async (req, res, next) => {
   try {
     res.send(await getAllProducts())
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+app.get('/products/:id', async (req, res, next) => {
+  try {
+    res.send(await getProduct(req.params.id))
   } catch (err) {
     console.log(err)
   }

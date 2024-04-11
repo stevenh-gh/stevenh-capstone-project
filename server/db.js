@@ -99,6 +99,23 @@ const getAllProducts = async () => {
   return response.rows
 }
 
+const getProduct = async (id) => {
+  const sql = `
+    select
+      product.id as id,
+      product.title as title,
+      product.price as price,
+      product.description as description,
+      product.image as image,
+      category.name as category
+    from product
+    join category on product.category_id = category.id
+    where product.id = $1
+  `
+  const response = await client.query(sql, [id])
+  return response.rows[0]
+}
+
 export {
   client,
   createTables,
@@ -108,4 +125,5 @@ export {
   createProduct,
   getAllCategories,
   getAllProducts,
+  getProduct
 }
