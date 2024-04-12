@@ -7,7 +7,7 @@ import { addToCart } from "../helpers";
 import { getProduct } from "../api";
 import { useParams } from "react-router-dom";
 
-function ProductDetails() {
+function ProductDetails({ token }) {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
 
@@ -34,7 +34,7 @@ function ProductDetails() {
             <h3>{product.title}</h3>
             <h4>${product.price}</h4>
             <p>{product.description}</p>
-            <Button onClick={() => handleClick(product)} variant="contained" size="large">Add to cart <AddShoppingCart sx={{ marginLeft: '10px' }} /></Button>
+            {token && <Button onClick={() => handleClick(product)} variant="contained" size="large">Add to cart <AddShoppingCart sx={{ marginLeft: '10px' }} /></Button>}
             <SnackbarProvider />
           </>
         )}

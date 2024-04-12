@@ -45,7 +45,7 @@ function App() {
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/cart" element={<Cart />} token={token} />
-        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/product/:id" element={<ProductDetails token={token} />} />
         <Route path='/checkout' element={<Checkout />} token={token} />
       </Routes>
     </Container>
