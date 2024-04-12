@@ -5,7 +5,7 @@ function createCart(id) {
 }
 
 export function addToCart(id) {
-  !window.localStorage.getItem('cart') && window.localStorage.setItem('cart', createCart(id));
+  // !window.localStorage.getItem('cart') && window.localStorage.setItem('cart', createCart(id));
   let cart = window.localStorage.getItem('cart')
   cart = JSON.parse(cart)
   let cartProds = cart.products

@@ -11,10 +11,18 @@ function Checkout() {
   const [sbOpen, setSbOpen] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!window.localStorage.getItem('token')) {
+      navigate('/')
+    }
+  })
+
   const handleClick = () => {
     setSbOpen(true)
     setTimeout(() => {
-      window.localStorage.removeItem('cart')
+      let json = JSON.parse(window.localStorage.getItem('cart'))
+      json.products = []
+      window.localStorage.setItem('cart', JSON.stringify(json))
       navigate('/')
     }, 3000)
   }
@@ -36,11 +44,13 @@ function Checkout() {
 
   useEffect(() => {
     async function gp() {
-      const cart = JSON.parse(window.localStorage.getItem('cart')).products
+      let cart = JSON.parse(window.localStorage.getItem('cart'))
+      console.log(cart)
+      cart = cart.products
       const products = await Promise.all(
         cart.map(async product => {
           const p = await getProduct(product.productId);
-          return { id: p.id, image: p.image, price: p.price, title: p.title, quantity: product.quantity }
+          return { id: p.id, image: p.image, price: Number(p.price), title: p.title, quantity: product.quantity }
         })
       )
       setCheckout(products);

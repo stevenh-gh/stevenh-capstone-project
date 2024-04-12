@@ -1,19 +1,28 @@
+import { SnackbarProvider, enqueueSnackbar } from "notistack";
+
 import Header from "../components/Header";
 import { Typography } from "@mui/material";
 import { signup } from "../api";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
 
   async function submit(e, signupData) {
     e.preventDefault();
-    // should return a token
-    const id = await signup(signupData);
-    // log for now
-    console.log(id);
-    e.target.reset();
+    try {
+      await signup(signupData);
+      e.target.reset();
+      enqueueSnackbar('Successfully signed up. Redirecting to login...')
+      setTimeout(() => {
+        navigate('/login')
+      }, 3000);
+    } catch (err) {
+      enqueueSnackbar(err)
+    }
   }
 
   return (
@@ -27,7 +36,7 @@ function Signup() {
           <input onChange={e => setPassword(e.target.value)} type="password" id="password" />
           <button type="submit">Sign up</button>
         </form>
-
+        <SnackbarProvider />
       </Typography>
     </>
   );

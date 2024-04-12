@@ -14,7 +14,11 @@ function FilterMenu({ setFilter }) {
   useEffect(() => {
     async function gc() {
       const json = await getCategories();
-      setCategories(json);
+      const cat = []
+      json.forEach(category => {
+        cat.push(category.name)
+      })
+      setCategories(cat);
     }
     gc();
   }, [])
@@ -54,7 +58,8 @@ function FilterMenu({ setFilter }) {
         <MenuItem onClick={handleClose}>Reset</MenuItem>
         <Divider />
         <MenuItem sx={{ fontVariant: 'small-caps' }}>category</MenuItem>
-        {categories && categories.map((category, id) => <MenuItem key={id} onClick={handleClose}>{category}</MenuItem>)}        {/* {categories && console.log(categories)} */}
+        {categories && categories.map((category, id) => <MenuItem key={id} onClick={handleClose}>{category}</MenuItem>)}
+        {/* {categories && console.log(categories)} */}
       </Menu>
     </div>
   );

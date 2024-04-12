@@ -1,4 +1,5 @@
-const URL = "https://fakestoreapi.com";
+// const URL = "https://fakestoreapi.com";
+const URL = "/api";
 
 export async function getProducts() {
   try {
@@ -42,10 +43,29 @@ export async function signup(signupData) {
   }
 }
 
-// accepts userid for now, should accept token
-export async function getCart(userId) {
+export async function getMe() {
   try {
-    const res = await fetch(`${URL}/carts/user/${userId}`);
+    const res = await fetch(`${URL}/auth/me`, {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
+    })
+    const json = await res.json()
+    return json
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+// accepts userid for now, should accept token
+// export async function getCart(userId) {
+export async function getCart() {
+  try {
+    const res = await fetch(`${URL}/carts/user/`, {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
+    });
     const json = await res.json();
     return json;
   } catch (err) {
