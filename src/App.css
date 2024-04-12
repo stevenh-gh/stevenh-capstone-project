@@ -1,0 +1,11 @@
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 20%);
+  grid-template-rows: repeat(5, 20%);
+  gap: 15px;
+  justify-content: center;
+}
+
+form button {
+  grid-column-start: span 2;
+}
