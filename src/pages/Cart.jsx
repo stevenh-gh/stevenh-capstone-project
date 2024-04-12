@@ -1,5 +1,6 @@
 import { Box, Button, IconButton, Paper } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
+import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import { getCart, getProduct } from "../api";
 import { useEffect, useState } from "react";
 
@@ -63,11 +64,20 @@ function Cart() {
     setCart(window.localStorage.getItem('cart'))
   }
 
+  function handleClick() {
+    if (!updateCart.products.length) {
+      enqueueSnackbar('Add some items to cart before checking out!')
+    }
+    else {
+      navigate('/checkout')
+    }
+  }
+
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Header txt={"Cart"} />
-        <Button onClick={() => navigate('/checkout')} size="large" variant="contained">Proceed to checkout <ShoppingCartCheckoutIcon sx={{ marginLeft: '15px' }} /></Button>
+        <Button onClick={() => handleClick()} size="large" variant="contained">Proceed to checkout <ShoppingCartCheckoutIcon sx={{ marginLeft: '15px' }} /></Button>
       </Box>
       <Grid container spacing={3}>
         {/* updateCart && console.log(updateCart) */}
@@ -93,6 +103,9 @@ function Cart() {
           );
         })}
       </Grid>
+      <Typography>
+        <SnackbarProvider />
+      </Typography>
     </>
   );
 }
