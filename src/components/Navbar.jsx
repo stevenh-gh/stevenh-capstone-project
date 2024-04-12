@@ -1,11 +1,13 @@
 import { Box, Typography } from "@mui/material";
+import { SnackbarProvider, enqueueSnackbar } from "notistack";
 
 import { Link } from "react-router-dom";
 
-function Navbar({ token, setToken }) {
+function Navbar({ user, setUser, token, setToken }) {
   return (
     <nav>
       <Typography variant="body1">
+        {user && <p>Welcome back, {user.username}!</p>}
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box>
             <Link to="/">Home</Link>
@@ -20,12 +22,15 @@ function Navbar({ token, setToken }) {
               )
               : <Link onClick={() => {
                 setToken(null)
+                setUser(null)
                 window.localStorage.removeItem('token')
+                enqueueSnackbar('You have been logged out')
               }}>Logout</Link>}
             {token && <Link to='/cart'>Cart</Link>}
           </Box>
         </Box>
       </Typography>
+      <SnackbarProvider />
     </nav>
   );
 }

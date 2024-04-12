@@ -12,17 +12,31 @@ import Login from "./pages/Login";
 import Navbar from "./components/Navbar";
 import ProductDetails from "./pages/ProductDetails";
 import Signup from "./pages/Signup";
+import { getMe } from "./api";
 
 function App() {
   const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     setToken(window.localStorage.getItem('token'))
   })
 
+  useEffect(() => {
+    async function gu() {
+      try {
+        const user = await getMe();
+        setUser(user)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    token && gu()
+  }, [token, user])
+
   return (
     <Container>
-      <Navbar token={token} setToken={setToken} />
+      <Navbar user={user} setUser={setUser} token={token} setToken={setToken} />
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <Header txt={"Steven H. E-Commerce Site"} />
       </Box>
