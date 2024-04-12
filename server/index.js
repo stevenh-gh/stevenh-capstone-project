@@ -109,7 +109,7 @@ const init = async () => {
   console.log('tables created')
 
   console.log('creating users...')
-  const user1 = await createUser({ username: 'johnd', password: 'm38rmF$' })
+  await createUser({ username: 'johnd', password: 'm38rmF$' })
   console.log('users created')
 
   console.log('creating categories...')
