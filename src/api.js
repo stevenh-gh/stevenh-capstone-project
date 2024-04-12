@@ -43,6 +43,20 @@ export async function signup(signupData) {
   }
 }
 
+export async function getMe() {
+  try {
+    const res = await fetch(`${URL}/auth/me`, {
+      headers: {
+        authorization: window.localStorage.getItem('token')
+      }
+    })
+    const json = await res.json()
+    return json
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 // accepts userid for now, should accept token
 // export async function getCart(userId) {
 export async function getCart() {
