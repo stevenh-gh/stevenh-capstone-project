@@ -18,6 +18,12 @@ function Cart() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!window.localStorage.getItem('token')) {
+      navigate('/')
+    }
+  })
+
+  useEffect(() => {
     async function gc() {
       const json = await getCart();
       window.localStorage.setItem('cart', JSON.stringify(json))

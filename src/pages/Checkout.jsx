@@ -11,6 +11,12 @@ function Checkout() {
   const [sbOpen, setSbOpen] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!window.localStorage.getItem('token')) {
+      navigate('/')
+    }
+  })
+
   const handleClick = () => {
     setSbOpen(true)
     setTimeout(() => {
