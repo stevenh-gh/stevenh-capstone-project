@@ -21,7 +21,7 @@ function Login({ setToken }) {
       enqueueSnackbar('Successfully logged in! Redirecting...')
       setTimeout(() => {
         navigate('/')
-      }, 3000);
+      }, 2000);
     } catch (err) {
       enqueueSnackbar(err)
     }
