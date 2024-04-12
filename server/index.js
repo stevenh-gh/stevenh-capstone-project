@@ -38,7 +38,7 @@ app.post('/api/auth/login', async (req, res, next) => {
   try {
     res.send(await authenticate(req.body))
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 })
 
@@ -46,7 +46,7 @@ app.get('/api/users', async (req, res, next) => {
   try {
     res.send(await getAllUsers());
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 })
 
@@ -54,7 +54,7 @@ app.post('/api/users', async (req, res, next) => {
   try {
     res.send(await createUser(req.body))
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 })
 
@@ -62,7 +62,7 @@ app.get('/api/products/categories', async (req, res, next) => {
   try {
     res.send(await getAllCategories());
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 })
 
@@ -70,7 +70,7 @@ app.get('/api/products', async (req, res, next) => {
   try {
     res.send(await getAllProducts())
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 })
 
@@ -78,7 +78,7 @@ app.get('/api/products/:id', async (req, res, next) => {
   try {
     res.send(await getProduct(req.params.id))
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 })
 
@@ -86,7 +86,7 @@ app.get('/api/carts', async (req, res, next) => {
   try {
     res.send(await getCarts());
   } catch (err) {
-    console.log(err)
+    next(err)
   }
 })
 
@@ -96,6 +96,7 @@ app.get('/api/carts/user/', isLoggedIn, async (req, res, next) => {
     res.send(await getCart(req.user.id))
   } catch (err) {
     console.log(err)
+    next(err)
   }
 })
 
