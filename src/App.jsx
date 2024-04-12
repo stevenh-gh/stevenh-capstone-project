@@ -32,7 +32,7 @@ function App() {
       }
     }
     token && gu()
-  }, [token, user])
+  }, [token])
 
   return (
     <Container>
