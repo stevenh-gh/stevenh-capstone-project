@@ -27,10 +27,10 @@ function ProductPreview({ product, token }) {
             <AddShoppingCart />
           </IconButton>
         }
-        <Typography>
-          <SnackbarProvider />
-        </Typography>
       </Paper>
+      <Typography>
+        <SnackbarProvider />
+      </Typography>
     </Grid>
   );
 }
