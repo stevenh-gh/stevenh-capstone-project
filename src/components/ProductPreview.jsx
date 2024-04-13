@@ -10,8 +10,10 @@ import { addToCart } from "../helpers";
 
 function ProductPreview({ product, token }) {
   function handleClick(id, title) {
-    addToCart(id)
-    enqueueSnackbar(`Added ${title} to cart`);
+    (async () => {
+      await addToCart(id)
+      enqueueSnackbar(`Added ${title} to cart`);
+    })()
   }
   return (
     <Grid xs={3}>

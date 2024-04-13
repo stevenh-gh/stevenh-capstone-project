@@ -1,11 +1,15 @@
-function createCart(id) {
-  const jsonObj = { id: 1, userId: id, products: [] };
-  const json = JSON.stringify(jsonObj);
-  return json;
+import { getCart } from "./api";
+
+async function createCart() {
+  // const jsonObj = { id: 1, userId: id, products: [] };
+  // const json = JSON.stringify(jsonObj);
+  // return json;
+  const json = await getCart();
+  window.localStorage.setItem('cart', JSON.stringify(json))
 }
 
-export function addToCart(id) {
-  // !window.localStorage.getItem('cart') && window.localStorage.setItem('cart', createCart(id));
+export async function addToCart(id) {
+  !window.localStorage.getItem('cart') && await createCart();
   let cart = window.localStorage.getItem('cart')
   cart = JSON.parse(cart)
   let cartProds = cart.products

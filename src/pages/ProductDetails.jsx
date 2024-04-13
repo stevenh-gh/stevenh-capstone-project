@@ -20,8 +20,10 @@ function ProductDetails({ token }) {
   }, []);
 
   function handleClick(product) {
-    addToCart(product.id)
-    enqueueSnackbar(`Added ${product.title} to cart!`)
+    (async () => {
+      await addToCart(product.id)
+      enqueueSnackbar(`Added ${product.title} to cart!`)
+    })()
   }
 
   return (
